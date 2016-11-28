@@ -11,8 +11,10 @@ import MapKit
 import SwiftyJSON
 import CoreData
 
+import MapKit
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, MKMapViewDelegate {
 
     let searchTextField: UITextField = UITextField()
     let mainMap = MKMapView()
@@ -26,8 +28,10 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         let mainMap = MKMapView()
         mainMap.frame = CGRect(x: 0, y: 0, width: deviceSize.width, height: deviceSize.height)
+        mainMap.delegate = self
         self.view.addSubview(mainMap)
         
         let searchBoxView = UIView(frame: CGRect(x: 15, y: 27, width: deviceSize.width - 30, height: 45))
@@ -41,7 +45,7 @@ class ViewController: UIViewController {
         
         searchBoxView.addSubview(self.searchTextField)
         
-        var closeButtonImage = UIImageView(image: UIImage(named: "close"))
+        let closeButtonImage = UIImageView(image: UIImage(named: "close"))
         closeButtonImage.frame = CGRect(x: Int(self.searchTextField.frame.maxX - 35), y: 10, width: 25, height: 25)
         self.searchTextField.addSubview(closeButtonImage)
         
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
             
             let selectedPOI = mapPOI as! NSManagedObject
             let buildingPin = MKPointAnnotation()
+     
             let buildingLocation = CLLocationCoordinate2DMake(selectedPOI.value(forKey: "lat") as! CLLocationDegrees, selectedPOI.value(forKey: "lng") as! CLLocationDegrees)
 
             buildingPin.coordinate = buildingLocation
@@ -83,24 +88,51 @@ class ViewController: UIViewController {
     }
     
     
-//    
-//    func loadData() {
-//        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
-//            do {
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-//                let jsonObj = JSON(data: data)
-//                
-//                if jsonObj != JSON.null {
-//                    
-//                    self.globalGeoData = jsonObj.array!
-//                    
-//                }
-//            }catch{
-//                
-//            }
-//        }
-//    }
+    func mapView(_ mapView: MKMapView!, viewFor annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            
+            let rightButton: AnyObject! = UIButton(type: .detailDisclosure)
+                //UIButton.withType(UIButtonType.detailDisclosure)
+            //rightButton.title(UIControlState.normal)
+            
+            pinView!.rightCalloutAccessoryView = rightButton as? UIView
+        
+        
+        
+        return pinView
+    }
     
+    func unwindToMain(segue: UIStoryboardSegue) {
+        print("unwind")
+    }
+
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            performSegue(withIdentifier: "moveToDetailView", sender: view)
+        }
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toTheMoon" )
+        {
+            var detailViewController = segue.destination as! DetailViewController
+            
+            detailViewController.data = globalMapData[0] as! NSDictionary
+            
+        }
+        
+    }
     
     
     

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E38B43EC890BB89462954EB /* Pods_IU_Campus_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD169971173B598FC52EDFE7 /* Pods_IU_Campus_Map.framework */; };
 		2B1B4A341DEAEB6B00EAC81A /* mapData_model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4A331DEAEB6B00EAC81A /* mapData_model.swift */; };
+		2B1B4A361DEBE98F00EAC81A /* MapViewElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4A351DEBE98F00EAC81A /* MapViewElements.swift */; };
+		2B1B4A381DEBEE1D00EAC81A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4A371DEBEE1D00EAC81A /* DetailViewController.swift */; };
 		2B42279C1DD8E52D000E0DDA /* Filter_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B42279B1DD8E52D000E0DDA /* Filter_ViewController.swift */; };
 		2BE37D9C1DCEBFB400EFB329 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE37D9B1DCEBFB400EFB329 /* AppDelegate.swift */; };
 		2BE37D9E1DCEBFB400EFB329 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE37D9D1DCEBFB400EFB329 /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		170EA29A5B22C08F19A2A67E /* Pods-IU Campus Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IU Campus Map.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IU Campus Map/Pods-IU Campus Map.debug.xcconfig"; sourceTree = "<group>"; };
 		2B1B4A331DEAEB6B00EAC81A /* mapData_model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapData_model.swift; sourceTree = "<group>"; };
+		2B1B4A351DEBE98F00EAC81A /* MapViewElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewElements.swift; sourceTree = "<group>"; };
+		2B1B4A371DEBEE1D00EAC81A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2B42279B1DD8E52D000E0DDA /* Filter_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter_ViewController.swift; sourceTree = "<group>"; };
 		2BE37D981DCEBFB400EFB329 /* IU Campus Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IU Campus Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE37D9B1DCEBFB400EFB329 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				2BE37D9B1DCEBFB400EFB329 /* AppDelegate.swift */,
 				2BE37D9D1DCEBFB400EFB329 /* ViewController.swift */,
 				2B1B4A331DEAEB6B00EAC81A /* mapData_model.swift */,
+				2B1B4A351DEBE98F00EAC81A /* MapViewElements.swift */,
+				2B1B4A371DEBEE1D00EAC81A /* DetailViewController.swift */,
 				2B42279B1DD8E52D000E0DDA /* Filter_ViewController.swift */,
 				2BE37DB01DCEC47C00EFB329 /* globalVariables.swift */,
 				2BE37D9F1DCEBFB400EFB329 /* Main.storyboard */,
@@ -229,10 +235,12 @@
 			files = (
 				2BE37DA41DCEBFB400EFB329 /* IU_Campus_Map.xcdatamodeld in Sources */,
 				2B42279C1DD8E52D000E0DDA /* Filter_ViewController.swift in Sources */,
+				2B1B4A361DEBE98F00EAC81A /* MapViewElements.swift in Sources */,
 				2B1B4A341DEAEB6B00EAC81A /* mapData_model.swift in Sources */,
 				2BE37D9E1DCEBFB400EFB329 /* ViewController.swift in Sources */,
 				2BE37DB11DCEC47C00EFB329 /* globalVariables.swift in Sources */,
 				2BE37D9C1DCEBFB400EFB329 /* AppDelegate.swift in Sources */,
+				2B1B4A381DEBEE1D00EAC81A /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
