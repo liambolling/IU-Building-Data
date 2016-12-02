@@ -6,6 +6,8 @@ target 'IU Campus Map' do
   use_frameworks!
 
   pod 'SwiftyJSON'
+  
+  pod 'pop'
   # Pods for IU Campus Map
 
 end

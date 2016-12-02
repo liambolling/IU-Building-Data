@@ -14,6 +14,12 @@ import CoreData
 import MapKit
 
 
+class TagCustomAnnoation: MKPointAnnotation {
+    var objectData: NSManagedObject!
+}
+
+
+
 class ViewController: UIViewController, MKMapViewDelegate {
 
     let searchTextField: UITextField = UITextField()
@@ -29,7 +35,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        let mainMap = MKMapView()
+        
         mainMap.frame = CGRect(x: 0, y: 0, width: deviceSize.width, height: deviceSize.height)
         mainMap.delegate = self
         self.view.addSubview(mainMap)
@@ -56,44 +62,29 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
 
         for mapPOI in globalMapData{
-            print((mapPOI as! NSManagedObject).value(forKey: "name"))
-            
             let selectedPOI = mapPOI as! NSManagedObject
-            let buildingPin = MKPointAnnotation()
+            let buildingPin = TagCustomAnnoation()
      
             let buildingLocation = CLLocationCoordinate2DMake(selectedPOI.value(forKey: "lat") as! CLLocationDegrees, selectedPOI.value(forKey: "lng") as! CLLocationDegrees)
-
+            
             buildingPin.coordinate = buildingLocation
             buildingPin.title = selectedPOI.value(forKey: "name") as! String?
+            buildingPin.objectData = selectedPOI
+            
             mainMap.addAnnotation(buildingPin)
             mainMap.showAnnotations(mainMap.annotations, animated: true)
         }
         
-        
-//        for building in self.globalGeoData {
-//            
-//            if building["lng"] != 0 && building["lat"] != 0 {
-//                
-//                let buildingPin = MKPointAnnotation()
-//                
-//                let buildingLocation = CLLocationCoordinate2DMake(building["lat"].double!, building["lng"].double!)
-//                
-//                buildingPin.coordinate = buildingLocation
-//                buildingPin.title = building["name"].string
-//                mainMap.addAnnotation(buildingPin)
-//                mainMap.showAnnotations(mainMap.annotations, animated: true)
-//            
-//            }
-//        }
+
     }
     
     
-    func mapView(_ mapView: MKMapView!, viewFor annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
             return nil
         }
-        
+
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
@@ -102,37 +93,83 @@ class ViewController: UIViewController, MKMapViewDelegate {
             pinView?.canShowCallout = true
             
             let rightButton: AnyObject! = UIButton(type: .detailDisclosure)
-                //UIButton.withType(UIButtonType.detailDisclosure)
+            //UIButton.withType(UIButtonType.detailDisclosure)
             //rightButton.title(UIControlState.normal)
             
             pinView!.rightCalloutAccessoryView = rightButton as? UIView
-        
-        
-        
+
         return pinView
     }
     
-    func unwindToMain(segue: UIStoryboardSegue) {
-        print("unwind")
-    }
+    
+    @IBAction func unwindToMapFromDetailView(segue: UIStoryboardSegue) {}
 
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         if control == view.rightCalloutAccessoryView {
             performSegue(withIdentifier: "moveToDetailView", sender: view)
         }
     }
     
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "toTheMoon" )
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "moveToDetailView" )
         {
-            var detailViewController = segue.destination as! DetailViewController
             
-            detailViewController.data = globalMapData[0] as! NSDictionary
+            var selectedObjectData = ((sender as! MKAnnotationView).annotation as! TagCustomAnnoation).objectData as NSManagedObject
+            print("object: ",selectedObjectData)
+            
+            
+            
+            //Convert to dictonary data type
+            let senderDictonary: NSMutableDictionary = [:]
+            senderDictonary.setValue(selectedObjectData.value(forKey: "name"), forKey: "name")
+            senderDictonary.setValue(selectedObjectData.value(forKey: "bld_code"), forKey: "code")
+            senderDictonary.setValue(selectedObjectData.value(forKey: "category"), forKey: "category")
+            senderDictonary.setValue(selectedObjectData.value(forKey: "lat"), forKey: "lat")
+            senderDictonary.setValue(selectedObjectData.value(forKey: "lng"), forKey: "lng")
+            
+            mainMap.showAnnotations([((sender as! MKAnnotationView).annotation as! TagCustomAnnoation)], animated: true)
+
+            let detailViewController = segue.destination as! DetailViewController
+            
+            detailViewController.data = senderDictonary
             
         }
-        
     }
+    
+//    override func prepare(segue: UIStoryboardSegue!, sender: AnyObject!) {
+//        if (segue.identifier == "Load View") {
+//            // pass data to next view
+//        }
+//    }
+    
+//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        print("Segue: ",segue)
+//        if (segue.identifier == "moveToDetailView" )
+//        {
+//            print("Hello")
+//            print(globalMapData[0])
+//            
+//            let selectedPOI = globalMapData[0] as! NSManagedObject
+//            let buildingPin = MKPointAnnotation()
+//            
+//            let buildingLocation = CLLocationCoordinate2DMake(selectedPOI.value(forKey: "lat") as! CLLocationDegrees, selectedPOI.value(forKey: "lng") as! CLLocationDegrees)
+//            
+//            buildingPin.coordinate = buildingLocation
+//            buildingPin.title = selectedPOI.value(forKey: "name") as! String?
+//            mainMap.addAnnotation(buildingPin)
+//            mainMap.showAnnotations(mainMap.annotations, animated: true)
+//            
+//            var detailViewController = segue.destination as! DetailViewController
+//            
+//            detailViewController.data = globalMapData[0] as! NSDictionary
+//            
+//        }
+//        
+//    }
     
     
     
