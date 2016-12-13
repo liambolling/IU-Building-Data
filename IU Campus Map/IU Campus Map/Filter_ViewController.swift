@@ -18,7 +18,8 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
         print("nah")
     }
 
-    var tableView: UITableView  =   UITableView()
+    var tableView: UITableView = UITableView()
+    var viewController: AnyObject? = nil
     
     var items: [String] = ["Viper", "X", "Games"]
     var shouldShowSearchResults: Bool = false
@@ -28,8 +29,10 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
     var filteredMapData: [AnyObject] = []
     
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, viewController: ViewController) {
         super.init(frame: frame)
+        
+        self.viewController = viewController
         
         tableView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         tableView.delegate = self
@@ -44,16 +47,13 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
         self.mapData = mapData as [AnyObject]
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
     func setFilteredMapData(filteredArray: NSArray) {
-        print("hhh: ",filteredArray)
         mapData = filteredArray as [AnyObject]
-        print(mapData)
         self.tableView.reloadData()
     }
     
@@ -64,17 +64,15 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        
         cell.textLabel?.text = (mapData[indexPath.row] as! NSManagedObject).value(forKey: "name") as! String?
-        
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row)!")
+        print(mapData[indexPath.row].value(forKey: "name"))
+        (self.viewController as! ViewController).fromFilterToMap(object: mapData[indexPath.row] as! NSManagedObject)
     }
     
     

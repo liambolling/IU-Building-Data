@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
+    
     var data: NSDictionary = [:]
+    var walking_eta = UILabel()
+    var running_eta = UILabel()
+    var driving_eta = UILabel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +77,63 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        let buildingGeo = CLLocationCoordinate2D(latitude: data.value(forKey: "lat") as! CLLocationDegrees, longitude: data.value(forKey: "lng") as! CLLocationDegrees)
+        determineDistanceTimes(buildingLocation: buildingGeo)
+    }
+    
+    
+    
+    func determineDistanceTimes(buildingLocation: CLLocationCoordinate2D){
+        
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.forCurrentLocation()
+        request.transportType = .automobile
+        let destinationCoordinates = buildingLocation
+        let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil))
+        request.destination = destinationItem
+        request.requestsAlternateRoutes = false
+        let directions = MKDirections(request: request)
+        
+        var distanceLabelString = ""
+        
+        directions.calculateETA { (etaResponse, error) -> Void in
+            
+            if let error = error {
+                print("Error while requesting ETA : \(error.localizedDescription)")
+            } else {
+                let shortestETA = Int((etaResponse?.expectedTravelTime)!)
+                
+                self.driving_eta.text = String(shortestETA / 60) + " MIN"
+                
+                let request2 = MKDirectionsRequest()
+                request2.source = MKMapItem.forCurrentLocation()
+                request2.destination = destinationItem
+                request2.requestsAlternateRoutes = false
+                request2.transportType = .walking
+                let directions2 = MKDirections(request: request2)
+                directions2.calculateETA { (etaResponse, error) -> Void in
+                    
+                    if let error = error {
+                        print("Error while requesting ETA : \(error.localizedDescription)")
+                    } else {
+                        let shortestETA = Int((etaResponse?.expectedTravelTime)!)
+
+                        self.walking_eta.text = String(shortestETA / 60) + " MIN"
+                        self.running_eta.text = String((shortestETA / 2) / 60) + " MIN"
+                        
+                        
+                    }
+                }
+                
+            }
+        }
+        
+        
+        
+    }
+    
+    
     
     func createTransportOptions(whiteBackground: UIView){
         
@@ -84,10 +147,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         walking_icon.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
         walking_container.addSubview(walking_icon)
         
-        var walking_eta = UILabel()
+        
         walking_eta.frame = CGRect(x: 0, y: 30, width: 50, height: 18)
         walking_eta.textAlignment = .center
-        walking_eta.text = "17 MIN"
+        walking_eta.text = "-- MIN"
         walking_eta.textColor = IUColors.grey
         walking_eta.font = walking_eta.font.withSize(11)
         walking_container.addSubview(walking_eta)
@@ -103,10 +166,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         running_icon.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
         running_container.addSubview(running_icon)
         
-        var running_eta = UILabel()
+        
         running_eta.frame = CGRect(x: 0, y: 30, width: 50, height: 18)
         running_eta.textAlignment = .center
-        running_eta.text = "9 MIN"
+        running_eta.text = "-- MIN"
         running_eta.textColor = IUColors.grey
         running_eta.font = running_eta.font.withSize(11)
         running_container.addSubview(running_eta)
@@ -122,10 +185,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         driving_icon.frame = CGRect(x: 8, y: 0, width: 36, height: 30)
         driving_container.addSubview(driving_icon)
         
-        var driving_eta = UILabel()
+        
         driving_eta.frame = CGRect(x: 0, y: 30, width: 50, height: 18)
         driving_eta.textAlignment = .center
-        driving_eta.text = "45 MIN"
+        driving_eta.text = "-- MIN"
         driving_eta.textColor = IUColors.grey
         driving_eta.font = driving_eta.font.withSize(11)
         driving_container.addSubview(driving_eta)
@@ -152,25 +215,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    /*
-    // MARK: - Navigation
 
-     
-     let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-     springAnimation.toValue =  NSValue(CGRect: CGRect(x: 0, y: sectionContainerYPosition, width: deviceSize.width, height: self.sectionsContainerHeight))
-     springAnimation.springBounciness = 1.0
-     self.sectionsContainer.pop_addAnimation(springAnimation, forKey: "springAnimation")
-     
-     let springAnimation2 = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-     springAnimation2.toValue = NSValue(CGRect: CGRect(x:20, y: self.descriptionHeight, width: deviceSize.width - 40, height: 90))
-     springAnimation2.springBounciness = 1.0
-     self.descriptionSection.pop_addAnimation(springAnimation2, forKey: "springAnimation2")
-     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
 
 }

@@ -1,6 +1,5 @@
 import urllib.request
 import urllib
-
 import json
 
 def scrape(num, letter):
@@ -50,20 +49,16 @@ def scrape(num, letter):
         })
 
 
-
-
-
 globalArray = []
 globalLetterArray = ["none","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
 file = open('data.json', 'w')
 
-for i in range(900,1000):
-
+for i in range(0,1):
     for letter in globalLetterArray:
         scrape(i, letter)
 
-
+print("globalArray: ",globalArray)
 tempString = json.dumps(globalArray)
 print(tempString)
 file.write(tempString)

@@ -20,17 +20,39 @@ class TagCustomAnnoation: MKPointAnnotation {
 
 
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    let locationManager = CLLocationManager()
+    
     let searchTextField: UITextField = UITextField()
     let mainMap = MKMapView()
     
+    var reverseMainMapCenter:AnyObject? = nil
+    var reverseMainMapZoom:AnyObject? = nil
+    
     var globalMapData: [AnyObject] = []
-    var filterView = Filter_View()
+    var filterView: AnyObject? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,28 +60,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         mainMap.frame = CGRect(x: 0, y: 0, width: deviceSize.width, height: deviceSize.height)
         mainMap.delegate = self
+        mainMap.showsUserLocation = true
         self.view.addSubview(mainMap)
         
         let searchBoxView = UIView(frame: CGRect(x: 15, y: 27, width: deviceSize.width - 30, height: 45))
         searchBoxView.backgroundColor = UIColor.white
         self.view.addSubview(searchBoxView)
         
-        self.searchTextField.frame = CGRect(x: 0, y: 0, width: searchBoxView.frame.width, height: searchBoxView.frame.height)
-        
+        self.searchTextField.frame = CGRect(x: 0, y: 0, width: searchBoxView.frame.width - 75, height: searchBoxView.frame.height)
         self.searchTextField.addTarget(self, action:#selector(ViewController.textFieldDidChange(sender:)), for:UIControlEvents.editingChanged)
         self.searchTextField.addTarget(self, action:#selector(ViewController.textFieldSelected(sender:)), for:UIControlEvents.editingDidBegin)
         
         searchBoxView.addSubview(self.searchTextField)
         
         let closeButtonImage = UIImageView(image: UIImage(named: "close"))
-        closeButtonImage.frame = CGRect(x: Int(self.searchTextField.frame.maxX - 35), y: 10, width: 25, height: 25)
-        self.searchTextField.addSubview(closeButtonImage)
+        closeButtonImage.frame = CGRect(x: Int(searchBoxView.frame.maxX - 45), y: 10, width: 25, height: 25)
+        searchBoxView.addSubview(closeButtonImage)
         
-        
+        let closeButton = UIButton()
+        closeButton.frame = CGRect(x: Int(searchBoxView.frame.maxX - 45), y: 10, width: 25, height: 25)
+        closeButton.addTarget(self, action:#selector(ViewController.removeFilterView(sender:)), for:.touchUpInside)
+        searchBoxView.addSubview(closeButton)
         
         let mapData = mapDataModel()
         self.globalMapData = mapData.initPullData() as [AnyObject]
-        
 
         for mapPOI in globalMapData{
             let selectedPOI = mapPOI as! NSManagedObject
@@ -102,8 +126,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    @IBAction func unwindToMapFromDetailView(segue: UIStoryboardSegue) {}
+    func fromFilterToMap(object: NSManagedObject){
+        
+        self.filterView?.removeFromSuperview()
+        view.endEditing(true)
 
+        performSegue(withIdentifier: "moveToDetailView", sender: object)
+    }
+    
+    
+    @IBAction func unwindToMapFromDetailView(segue: UIStoryboardSegue) {
+
+        mainMap.setRegion(self.reverseMainMapCenter as! MKCoordinateRegion, animated: true)
+        
+    }
+
+    
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
@@ -112,76 +151,51 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    
+    func removeFilterView(sender: AnyObject){
+        self.filterView?.removeFromSuperview()
+        self.searchTextField.text = ""
+        view.endEditing(true)
+    }
+    
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "moveToDetailView" )
-        {
-            
-            var selectedObjectData = ((sender as! MKAnnotationView).annotation as! TagCustomAnnoation).objectData as NSManagedObject
-            print("object: ",selectedObjectData)
-            
-            
-            
-            //Convert to dictonary data type
-            let senderDictonary: NSMutableDictionary = [:]
-            senderDictonary.setValue(selectedObjectData.value(forKey: "name"), forKey: "name")
-            senderDictonary.setValue(selectedObjectData.value(forKey: "bld_code"), forKey: "code")
-            senderDictonary.setValue(selectedObjectData.value(forKey: "category"), forKey: "category")
-            senderDictonary.setValue(selectedObjectData.value(forKey: "lat"), forKey: "lat")
-            senderDictonary.setValue(selectedObjectData.value(forKey: "lng"), forKey: "lng")
-            
+        
+        var selectedObjectData: NSManagedObject
+        self.reverseMainMapCenter = mainMap.region as AnyObject?
+        
+        
+        if (segue.identifier == "moveToDetailView" && sender is MKPinAnnotationView) {
+            selectedObjectData = ((sender as! MKAnnotationView).annotation as! TagCustomAnnoation).objectData as NSManagedObject
             mainMap.showAnnotations([((sender as! MKAnnotationView).annotation as! TagCustomAnnoation)], animated: true)
-
-            let detailViewController = segue.destination as! DetailViewController
-            
-            detailViewController.data = senderDictonary
-            
+        }else{
+            selectedObjectData = sender as! NSManagedObject
+            let tempAnnotation = MKPointAnnotation()
+            tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: selectedObjectData.value(forKey: "lat") as! CLLocationDegrees, longitude: selectedObjectData.value(forKey: "lng") as! CLLocationDegrees)
+            mainMap.showAnnotations([tempAnnotation], animated: true)
         }
+        
+        //Convert to dictonary data type
+        let senderDictonary: NSMutableDictionary = [:]
+        senderDictonary.setValue(selectedObjectData.value(forKey: "name"), forKey: "name")
+        senderDictonary.setValue(selectedObjectData.value(forKey: "bld_code"), forKey: "code")
+        senderDictonary.setValue(selectedObjectData.value(forKey: "category"), forKey: "category")
+        senderDictonary.setValue(selectedObjectData.value(forKey: "lat"), forKey: "lat")
+        senderDictonary.setValue(selectedObjectData.value(forKey: "lng"), forKey: "lng")
+        
+        let detailViewController = segue.destination as! DetailViewController
+        detailViewController.data = senderDictonary
+        
     }
-    
-//    override func prepare(segue: UIStoryboardSegue!, sender: AnyObject!) {
-//        if (segue.identifier == "Load View") {
-//            // pass data to next view
-//        }
-//    }
-    
-//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        print("Segue: ",segue)
-//        if (segue.identifier == "moveToDetailView" )
-//        {
-//            print("Hello")
-//            print(globalMapData[0])
-//            
-//            let selectedPOI = globalMapData[0] as! NSManagedObject
-//            let buildingPin = MKPointAnnotation()
-//            
-//            let buildingLocation = CLLocationCoordinate2DMake(selectedPOI.value(forKey: "lat") as! CLLocationDegrees, selectedPOI.value(forKey: "lng") as! CLLocationDegrees)
-//            
-//            buildingPin.coordinate = buildingLocation
-//            buildingPin.title = selectedPOI.value(forKey: "name") as! String?
-//            mainMap.addAnnotation(buildingPin)
-//            mainMap.showAnnotations(mainMap.annotations, animated: true)
-//            
-//            var detailViewController = segue.destination as! DetailViewController
-//            
-//            detailViewController.data = globalMapData[0] as! NSDictionary
-//            
-//        }
-//        
-//    }
-    
-    
-    
-    
+
     
     
     
     func textFieldSelected(sender:AnyObject){
-        filterView = Filter_View(frame: CGRect(x: 15, y: 85, width: deviceSize.width - 30, height: deviceSize.height - 40))
-        filterView.addTableData(mapData: self.globalMapData as NSArray)
-        filterView.backgroundColor = UIColor.green
-        self.view.addSubview(filterView)
+        self.filterView = Filter_View(frame: CGRect(x: 15, y: 85, width: deviceSize.width - 30, height: deviceSize.height - 40), viewController: self)
+        (self.filterView as! Filter_View).addTableData(mapData: self.globalMapData as NSArray)
+        self.view.addSubview(self.filterView as! Filter_View)
     }
     
     
@@ -190,50 +204,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func textFieldDidChange(sender: AnyObject){
         
         let mapData = mapDataModel()
-        var filterMapData = mapData.searchMapData(searchText: self.searchTextField.text!) as [AnyObject]
+        let filterMapData = mapData.searchMapData(searchText: self.searchTextField.text!) as [AnyObject]
 
-        filterView.setFilteredMapData(filteredArray: filterMapData as NSArray)
-        
-        
-        
-//        let term = self.searchTextField.text
-//        
-//        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
-//            do {
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-//                let jsonObj = JSON(data: data)
-//                
-//                if jsonObj != JSON.null {
-//                    
-//                    let infoArray = jsonObj.array
-//                    
-//                    for elem in infoArray! {
-//                        if term != "" {
-//                            
-//                            if term?.lowercased() == elem["bld_code"].string?.lowercased() {
-//                                print("FOUND CODE")
-//                                print(elem)
-//                            }
-//                            
-//                            if term?.lowercased() == elem["name"].string?.lowercased() {
-//                                print("FOUND NAME")
-//                                print(elem)
-//                            }
-//                            
-//                        }
-//                    }
-//                    
-//                    
-//                } else {
-//                    print("Could not get json from file, make sure that file contains valid json.")
-//                }
-//            } catch let error {
-//                print(error.localizedDescription)
-//            }
-//        } else {
-//            print("Invalid filename/path.")
-//        }
-        
+        (self.filterView as! Filter_View).setFilteredMapData(filteredArray: filterMapData as NSArray)
         
     }
     
