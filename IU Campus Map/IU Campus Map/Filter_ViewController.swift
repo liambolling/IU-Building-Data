@@ -34,12 +34,31 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
         
         self.viewController = viewController
         
+        var backgroundView = UIView()
+        backgroundView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        backgroundView.backgroundColor = UIColor.white
+        backgroundView.layer.cornerRadius = 5.0
+        backgroundView.layer.borderWidth = 1.0
+        backgroundView.layer.borderColor = UIColor.clear.cgColor
+        backgroundView.layer.masksToBounds = true
+        
+        backgroundView.layer.shadowColor = UIColor.lightGray.cgColor
+        backgroundView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        backgroundView.layer.shadowRadius = 2.0
+        backgroundView.layer.shadowOpacity = 1.0
+        backgroundView.layer.masksToBounds = false
+        self.addSubview(backgroundView)
+        
         tableView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        tableView.layer.cornerRadius = 5.0
+        tableView.clipsToBounds = true
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.addSubview(tableView)
+        
     }
     
     

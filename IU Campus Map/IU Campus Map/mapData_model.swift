@@ -14,10 +14,6 @@ import SwiftyJSON
 
 class mapDataModel: NSObject {
 
-    
-    
-    
-    
     func searchMapData(searchText: String) -> NSArray{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -81,10 +77,7 @@ class mapDataModel: NSObject {
             let results = try managedContext.fetch(fetchRequest)
             let resultsArray = results as! [NSManagedObject]
             
-            
             if resultsArray.count == 0 {
-                
-                print("Nothing in here")
                 
                 if let path = Bundle.main.path(forResource: "data", ofType: "json") {
                     do {
@@ -123,7 +116,7 @@ class mapDataModel: NSObject {
                                 }
                             }
                             
-                            return results as NSArray
+                            return self.initPullData() as NSArray
                             
                         }
                     }catch{
@@ -136,18 +129,7 @@ class mapDataModel: NSObject {
                 return results as NSArray
                 
             }
-            
-            
-        
-            
-            //                                    let buildingLocation = CLLocationCoordinate2DMake(building["lat"].double!, building["lng"].double!)
-            //
-            //                                    buildingPin.coordinate = buildingLocation
-            //                                    buildingPin.title = building["name"].string
-            //                                    mainMap.addAnnotation(buildingPin)
-            //                                    mainMap.showAnnotations(mainMap.annotations, animated: true)
-            
-            
+
         }catch{
             print("error?")
             return ["error"] as NSArray
