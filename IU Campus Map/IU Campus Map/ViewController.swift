@@ -18,8 +18,6 @@ class TagCustomAnnoation: MKPointAnnotation {
     var objectData: NSManagedObject!
 }
 
-
-
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
@@ -173,7 +171,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         view.endEditing(true)
         self.blackBackground.removeFromSuperview()
     }
-    
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -233,7 +230,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 

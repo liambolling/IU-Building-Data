@@ -11,7 +11,6 @@ import MapKit
 
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
-    
     var data: NSDictionary = [:]
     var walking_eta = UILabel()
     var running_eta = UILabel()
@@ -57,8 +56,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         nameTextField.textColor = IUColors.crimson
         whiteBackground.addSubview(nameTextField)
         
-        var codeText = self.data.value(forKey: "code") as! String
-        var catText = self.data.value(forKey: "code") as! String
+        let codeText = self.data.value(forKey: "code") as! String
+        let catText = self.data.value(forKey: "code") as! String
         var metaText = ""
         
         if codeText == "" {
@@ -70,14 +69,14 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
             metaText += " • "+(self.data.value(forKey: "category") as! String).uppercased()
         }
         
-        var metaTextField = UILabel()
+        let metaTextField = UILabel()
         metaTextField.text = metaText
         metaTextField.frame = CGRect(x: 15, y: 47, width: deviceSize.width - 30, height: 18)
         metaTextField.font = metaTextField.font.withSize(14)
         metaTextField.textColor = IUColors.grey
         whiteBackground.addSubview(metaTextField)
         
-        var lineSplit = UIView()
+        let lineSplit = UIView()
         lineSplit.frame = CGRect(x: 15, y: 85, width: deviceSize.width - 30, height: 1)
         lineSplit.backgroundColor = IUColors.lightGrey
         whiteBackground.addSubview(lineSplit)
@@ -105,8 +104,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         request.requestsAlternateRoutes = false
         let directions = MKDirections(request: request)
         
-        var distanceLabelString = ""
-        
         directions.calculateETA { (etaResponse, error) -> Void in
             
             if let error = error {
@@ -131,16 +128,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
                         self.walking_eta.text = String(shortestETA / 60) + " MIN"
                         self.running_eta.text = String((shortestETA / 2) / 60) + " MIN"
-                        
-                        
+
                     }
                 }
-                
             }
         }
-        
-        
-        
     }
     
     

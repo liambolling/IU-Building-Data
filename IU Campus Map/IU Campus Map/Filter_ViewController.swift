@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreData
 
-
 class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
     
     @available(iOS 8.0, *)
@@ -34,7 +33,7 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
         
         self.viewController = viewController
         
-        var backgroundView = UIView()
+        let backgroundView = UIView()
         backgroundView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         backgroundView.backgroundColor = UIColor.white
         backgroundView.layer.cornerRadius = 5.0
@@ -60,7 +59,6 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
         self.addSubview(tableView)
         
     }
-    
     
     func addTableData(mapData: NSArray) {
         self.mapData = mapData as [AnyObject]
@@ -89,8 +87,6 @@ class Filter_View: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.row)!")
-        print(mapData[indexPath.row].value(forKey: "name"))
         (self.viewController as! ViewController).fromFilterToMap(object: mapData[indexPath.row] as! NSManagedObject)
     }
     

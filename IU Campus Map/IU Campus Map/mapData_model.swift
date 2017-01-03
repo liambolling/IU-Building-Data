@@ -25,7 +25,7 @@ class mapDataModel: NSObject {
         
         do {
             let results = try managedContext.fetch(fetchRequest)
-            var resultsArray = results as! [NSManagedObject]
+            let resultsArray = results as! [NSManagedObject]
             
             var filteredResultsArray: [NSManagedObject] = []
             
@@ -48,21 +48,13 @@ class mapDataModel: NSObject {
             
             return filteredResultsArray as NSArray
             
-            
         } catch {
-            
-            
-            
+            // Do nothing
         }
         
         return ["error"]
-        
-
-        
     }
-    
-    
-    
+
     
     func initPullData() -> NSArray{
         
@@ -91,7 +83,6 @@ class mapDataModel: NSObject {
                     
                                 if building["lng"] != 0 && building["lat"] != 0 {
                     
-                                    
                                     let entity =  NSEntityDescription.entity(forEntityName: "MapData", in: managedContext)
                                     let cacheObject = NSManagedObject(entity: entity!, insertInto: managedContext)
                                     
@@ -125,13 +116,10 @@ class mapDataModel: NSObject {
                 }
                 
             }else{
-                
                 return results as NSArray
-                
             }
 
         }catch{
-            print("error?")
             return ["error"] as NSArray
         }
         return ["error"] as NSArray
