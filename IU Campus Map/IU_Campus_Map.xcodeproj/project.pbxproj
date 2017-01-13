@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B6494AB1E272C15009C768D /* IU_Campus_Map in Resources */ = {isa = PBXBuildFile; fileRef = 2B6494AA1E272C15009C768D /* IU_Campus_Map */; };
+		9389092E558D8F047B76010A /* Pods_IU_Campus_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B3D374ECFCEAB5B16B3534 /* Pods_IU_Campus_Map.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2B6494AA1E272C15009C768D /* IU_Campus_Map */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IU_Campus_Map; sourceTree = "<group>"; };
+		2BE37D981DCEBFB400EFB329 /* IU_Campus_Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IU_Campus_Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6320AB970526EAFB29DD7DF4 /* Pods-IU_Campus_Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IU_Campus_Map.release.xcconfig"; path = "Pods/Target Support Files/Pods-IU_Campus_Map/Pods-IU_Campus_Map.release.xcconfig"; sourceTree = "<group>"; };
+		C1E1E0D0F5C1DF4FD04220B9 /* Pods-IU_Campus_Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IU_Campus_Map.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IU_Campus_Map/Pods-IU_Campus_Map.debug.xcconfig"; sourceTree = "<group>"; };
+		C2B3D374ECFCEAB5B16B3534 /* Pods_IU_Campus_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IU_Campus_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2BE37D951DCEBFB400EFB329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9389092E558D8F047B76010A /* Pods_IU_Campus_Map.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2BE37D8F1DCEBFB400EFB329 = {
+			isa = PBXGroup;
+			children = (
+				2B6494AA1E272C15009C768D /* IU_Campus_Map */,
+				2BE37D991DCEBFB400EFB329 /* Products */,
+				3419D9A38713AE5D724DAC47 /* Pods */,
+				41313999AAE4687D27115BF7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2BE37D991DCEBFB400EFB329 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BE37D981DCEBFB400EFB329 /* IU_Campus_Map.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3419D9A38713AE5D724DAC47 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1E1E0D0F5C1DF4FD04220B9 /* Pods-IU_Campus_Map.debug.xcconfig */,
+				6320AB970526EAFB29DD7DF4 /* Pods-IU_Campus_Map.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		41313999AAE4687D27115BF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2B3D374ECFCEAB5B16B3534 /* Pods_IU_Campus_Map.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2BE37D971DCEBFB400EFB329 /* IU_Campus_Map */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BE37DAD1DCEBFB400EFB329 /* Build configuration list for PBXNativeTarget "IU_Campus_Map" */;
+			buildPhases = (
+				FEB99AEF8DCFAA6D215CFFE7 /* [CP] Check Pods Manifest.lock */,
+				2BE37D941DCEBFB400EFB329 /* Sources */,
+				2BE37D951DCEBFB400EFB329 /* Frameworks */,
+				2BE37D961DCEBFB400EFB329 /* Resources */,
+				21DE2DA055FA87AC2BEB3617 /* [CP] Embed Pods Frameworks */,
+				B5987D0E973A1C45FCE0BDC8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IU_Campus_Map;
+			productName = "IU Campus Map";
+			productReference = 2BE37D981DCEBFB400EFB329 /* IU_Campus_Map.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2BE37D901DCEBFB400EFB329 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					2BE37D971DCEBFB400EFB329 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 6PGC26D2WG;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2BE37D931DCEBFB400EFB329 /* Build configuration list for PBXProject "IU_Campus_Map" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2BE37D8F1DCEBFB400EFB329;
+			productRefGroup = 2BE37D991DCEBFB400EFB329 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2BE37D971DCEBFB400EFB329 /* IU_Campus_Map */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BE37D961DCEBFB400EFB329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B6494AB1E272C15009C768D /* IU_Campus_Map in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21DE2DA055FA87AC2BEB3617 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IU_Campus_Map/Pods-IU_Campus_Map-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5987D0E973A1C45FCE0BDC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IU_Campus_Map/Pods-IU_Campus_Map-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEB99AEF8DCFAA6D215CFFE7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BE37D941DCEBFB400EFB329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2BE37DAB1DCEBFB400EFB329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2BE37DAC1DCEBFB400EFB329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2BE37DAE1DCEBFB400EFB329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1E1E0D0F5C1DF4FD04220B9 /* Pods-IU_Campus_Map.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6PGC26D2WG;
+				INFOPLIST_FILE = "$(SRCROOT)/IU_Campus_Map/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "liambolling.IU-Campus-Map";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "01d71e9f-47f3-4a05-bd38-3431d9ec709a";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2BE37DAF1DCEBFB400EFB329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6320AB970526EAFB29DD7DF4 /* Pods-IU_Campus_Map.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6PGC26D2WG;
+				INFOPLIST_FILE = "$(SRCROOT)/IU_Campus_Map/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "liambolling.IU-Campus-Map";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "01d71e9f-47f3-4a05-bd38-3431d9ec709a";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2BE37D931DCEBFB400EFB329 /* Build configuration list for PBXProject "IU_Campus_Map" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BE37DAB1DCEBFB400EFB329 /* Debug */,
+				2BE37DAC1DCEBFB400EFB329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BE37DAD1DCEBFB400EFB329 /* Build configuration list for PBXNativeTarget "IU_Campus_Map" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BE37DAE1DCEBFB400EFB329 /* Debug */,
+				2BE37DAF1DCEBFB400EFB329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2BE37D901DCEBFB400EFB329 /* Project object */;
+}
