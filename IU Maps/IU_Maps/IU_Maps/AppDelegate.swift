@@ -63,8 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    static let projectName = "IU_Maps"
-    static let dataModelName = "IU_Maps"
+    static let projectName = "IU_Campus_Map"
+    static let dataModelName = "Cache_Model"
     
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "dddd.ygefgyfggyerer" in the application's documents Application Support directory.
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "IU_Maps", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "IU_Campus_Map", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     

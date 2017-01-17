@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B06A8031E2969C600F51E3D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B06A8021E2969C600F51E3D /* MapKit.framework */; };
+		2B06A8061E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B06A8041E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodeld */; };
 		2B96092A1E29647800A5242E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9609291E29647800A5242E /* AppDelegate.swift */; };
 		2B96092C1E29647800A5242E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96092B1E29647800A5242E /* ViewController.swift */; };
 		2B96092F1E29647800A5242E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B96092D1E29647800A5242E /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		07D58826F51CBC8C7A2F4A82 /* Pods_IU_Maps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IU_Maps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8F64FC554EF64387921617 /* Pods-IU_Maps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IU_Maps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IU_Maps/Pods-IU_Maps.debug.xcconfig"; sourceTree = "<group>"; };
 		2B06A8021E2969C600F51E3D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2B06A8051E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IU_Campus_Map.xcdatamodel; sourceTree = "<group>"; };
 		2B860CD91E2965A200850FF5 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		2B9609261E29647800A5242E /* IU_Maps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IU_Maps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B9609291E29647800A5242E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				2B9609401E29651700A5242E /* Filter_ViewController.swift */,
 				2B9609411E29651700A5242E /* globalVariables.swift */,
 				2B9609421E29651700A5242E /* GoogleService-Info.plist */,
+				2B06A8041E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodeld */,
 				2B9609431E29651700A5242E /* mapData_model.swift */,
 				2B96092D1E29647800A5242E /* Main.storyboard */,
 				2B9609331E29647800A5242E /* Assets.xcassets */,
@@ -251,6 +254,7 @@
 				2B9609321E29647800A5242E /* IU_Maps.xcdatamodeld in Sources */,
 				2B9609461E29651700A5242E /* Filter_ViewController.swift in Sources */,
 				2B96092C1E29647800A5242E /* ViewController.swift in Sources */,
+				2B06A8061E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodeld in Sources */,
 				2B96092A1E29647800A5242E /* AppDelegate.swift in Sources */,
 				2B9609451E29651700A5242E /* DetailViewController.swift in Sources */,
 			);
@@ -425,6 +429,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		2B06A8041E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2B06A8051E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodel */,
+			);
+			currentVersion = 2B06A8051E2D8AED00F51E3D /* IU_Campus_Map.xcdatamodel */;
+			path = IU_Campus_Map.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		2B9609301E29647800A5242E /* IU_Maps.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
