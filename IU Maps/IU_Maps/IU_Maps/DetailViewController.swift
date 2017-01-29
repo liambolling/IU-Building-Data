@@ -109,12 +109,13 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         request.destination = destinationItem
         request.requestsAlternateRoutes = false
         let directions = MKDirections(request: request)
-        
+
         directions.calculateETA { (etaResponse, error) -> Void in
             
             if let error = error {
                 print("Error while requesting ETA : \(error.localizedDescription)")
             } else {
+                
                 let shortestETA = Int((etaResponse?.expectedTravelTime)!)
                 
                 self.driving_eta.text = String(shortestETA / 60) + " MIN"
