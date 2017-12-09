@@ -33,10 +33,21 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         backgroundExitButton.frame = CGRect(x: 0, y: 0, width: deviceSize.width, height: deviceSize.height)
         backgroundScrollView.addSubview(backgroundExitButton)
 
-        let whiteBackground = UIView(frame: CGRect(x: 0, y: deviceSize.height - 175, width: deviceSize.width, height: 175))
+        let whiteBackground = UIView()
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2436:
+                print("iPhone X")
+                whiteBackground.frame = CGRect(x: 0, y: deviceSize.height - 240, width: deviceSize.width, height: 240)
+            default:
+                print("normal iphone")
+                whiteBackground.frame = CGRect(x: 0, y: deviceSize.height - 175, width: deviceSize.width, height: 175)
+            }
+        }
 
         whiteBackground.backgroundColor = UIColor.white
-        whiteBackground.layer.cornerRadius = 5.0
+        whiteBackground.layer.cornerRadius = 7.0
         whiteBackground.layer.borderWidth = 1.0
         whiteBackground.layer.borderColor = UIColor.clear.cgColor
         whiteBackground.layer.masksToBounds = true
@@ -315,8 +326,12 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        print(targetContentOffset.pointee.y)
+        print(scrollView.contentOffset.y)
+        
         let someOffset: CGFloat = 10
-        if (targetContentOffset.pointee.y == 0 && scrollView.contentOffset.y < someOffset) {
+        if (scrollView.contentOffset.y < someOffset) {
             self.performSegue(withIdentifier: "DetailToMapUnwind", sender: self)
         }
     }

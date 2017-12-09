@@ -74,7 +74,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         parentView.clipsToBounds = true
         self.view.addSubview(parentView)
         
-        searchBoxView.frame = CGRect(x: 15, y: 27, width: deviceSize.width - 30, height: 45)
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2436:
+                print("iPhone X")
+                searchBoxView.frame = CGRect(x: 15, y: 50, width: deviceSize.width - 30, height: 45)
+            default:
+                print("normal iphone")
+                searchBoxView.frame = CGRect(x: 15, y: 27, width: deviceSize.width - 30, height: 45)
+            }
+        }
+        
         searchBoxView.backgroundColor = UIColor.white
         searchBoxView.layer.cornerRadius = 5.0
         searchBoxView.layer.borderWidth = 1.0
@@ -276,7 +286,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     func textFieldSelected(sender:AnyObject){
-        self.filterView = Filter_View(frame: CGRect(x: 15, y: 85, width: deviceSize.width - 30, height: deviceSize.height - 40), viewController: self)
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2436:
+                print("iPhone X")
+                self.filterView = Filter_View(frame: CGRect(x: 15, y: 108, width: deviceSize.width - 30, height: deviceSize.height - 40), viewController: self)
+            default:
+                print("normal iphone")
+                self.filterView = Filter_View(frame: CGRect(x: 15, y: 85, width: deviceSize.width - 30, height: deviceSize.height - 40), viewController: self)
+            }
+        }
+        
         (self.filterView as! Filter_View).addTableData(mapData: self.globalMapData as NSArray)
         self.view.addSubview(self.blackBackground)
         
